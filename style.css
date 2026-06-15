@@ -561,6 +561,8 @@ body {
     .app-container {
         flex-direction: column;
         position: relative;
+        width: 100%;
+        height: 100dvh; /* dynamic viewport height */
     }
 
     /* Sidebar Mobile adjustments (Collapsible overlay) */
