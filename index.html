@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Insurance Assistant — Portfolio RAG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Vanilla CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background glow elements for aesthetic depth -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- 1. Cold-start Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container glass">
+            <div class="logo-wrapper">
+                <svg class="logo-icon animate-pulse" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7V13C3 18.52 6.84 23.64 12 25C17.16 23.64 21 18.52 21 13V7L12 2Z" fill="url(#gradient-primary)" stroke="white" stroke-width="1.5"/>
+                    <path d="M9 12.5L11 14.5L15 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="gradient-primary" x1="3" y1="2" x2="21" y2="25" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h2>Membangunkan Asisten AI...</h2>
+            <p>Server AI sedang memulai proses startup (ini memerlukan waktu sekitar 30-40 detik saat cold-start gratis).</p>
+            
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            
+            <div id="status-text" class="status-text">Status: Melakukan ping ke server...</div>
+        </div>
+    </div>
+
+    <!-- 2. Main RAG Chat Application -->
+    <div id="app-container" class="app-container hide">
+        <!-- Sidebar -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7V13C3 18.52 6.84 23.64 12 25C17.16 23.64 21 18.52 21 13V7L12 2Z" fill="url(#gradient-sidebar)"/>
+                    <path d="M9 12.5L11 14.5L15 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="gradient-sidebar" x1="3" y1="2" x2="21" y2="25" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3B82F6"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="brand-name">SecureRAG</span>
+            </div>
+
+            <div class="sidebar-content">
+                <h3>Tentang Project</h3>
+                <p class="about-desc">
+                    Asisten RAG cross-lingual asuransi. Anda bisa bertanya dalam <strong>Bahasa Indonesia</strong> tentang isi dokumen panduan asuransi **English** yang tersimpan di FAISS database.
+                </p>
+
+                <h3>Dokumen Terindeks</h3>
+                <ul class="docs-list">
+                    <li>
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <span class="doc-title">Auto Insurance Guide</span>
+                            <span class="doc-meta">State of Washington</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <span class="doc-title">Auto Insurance Guide</span>
+                            <span class="doc-meta">State of Wisconsin</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <span class="doc-title">Homeowners Insurance</span>
+                            <span class="doc-meta">State of Wisconsin</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <span class="doc-title">Long-Term Care Guide</span>
+                            <span class="doc-meta">State of Texas</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <span class="doc-title">Health Insurance Basics</span>
+                            <span class="doc-meta">CMS / Federal Gov</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="api-status">
+                    <span class="status-indicator online"></span>
+                    <span>Server: HF Spaces Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Main Area -->
+        <main class="chat-area">
+            <header class="chat-header glass">
+                <div class="header-info">
+                    <h1>Asisten Klaim Asuransi AI</h1>
+                    <p>Mendukung pertanyaan bilingual (ID / EN) secara real-time</p>
+                </div>
+                <div class="config-badge">
+                    <span>FAISS + MMR + Cross-Encoder</span>
+                </div>
+            </header>
+
+            <!-- Message History -->
+            <div id="chat-messages" class="chat-messages">
+                <!-- Welcome Message -->
+                <div class="message system-message glass">
+                    <div class="avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Halo! Saya adalah Asisten AI Asuransi Anda. Saya dapat menjawab pertanyaan seputar prosedur klaim, deductible, cakupan polis, dan tips asuransi lainnya berdasarkan dokumen panduan asuransi resmi.</p>
+                        <p class="suggestions-title">Pertanyaan yang sering ditanyakan:</p>
+                        <div class="suggestions-container">
+                            <button class="suggestion-btn" onclick="sendSuggestion('Bagaimana prosedur mengajukan klaim asuransi mobil?')">Bagaimana prosedur klaim mobil?</button>
+                            <button class="suggestion-btn" onclick="sendSuggestion('Apakah asuransi homeowners menanggung banjir?')">Apakah asuransi rumah menanggung banjir?</button>
+                            <button class="suggestion-btn" onclick="sendSuggestion('Apa perbedaan collision dan comprehensive coverage?')">Collision vs Comprehensive</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area glass">
+                <form id="chat-form" class="chat-form">
+                    <input type="text" id="query-input" placeholder="Tulis pertanyaan Anda di sini..." autocomplete="off" required>
+                    <button type="submit" id="send-btn" class="send-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z" fill="white"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- App Logic JS -->
+    <script src="app.js"></script>
+</body>
+</html>
