@@ -8,6 +8,21 @@ const statusText = document.getElementById("status-text");
 const chatForm = document.getElementById("chat-form");
 const queryInput = document.getElementById("query-input");
 const chatMessages = document.getElementById("chat-messages");
+const menuToggle = document.getElementById("menu-toggle");
+const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+const sidebar = document.querySelector(".sidebar");
+
+// Sidebar Mobile Toggle
+if (menuToggle && sidebar) {
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.add("active");
+    });
+}
+if (closeSidebarBtn && sidebar) {
+    closeSidebarBtn.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+    });
+}
 
 // Start polling backend health
 let progress = 0;

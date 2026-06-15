@@ -547,3 +547,149 @@ body {
 .animate-pulse {
     animation: pulse 2s infinite ease-in-out;
 }
+
+/* Mobile Responsive Media Queries */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%;
+    }
+
+    body {
+        align-items: stretch;
+    }
+
+    .app-container {
+        flex-direction: column;
+        position: relative;
+    }
+
+    /* Sidebar Mobile adjustments (Collapsible overlay) */
+    .sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Menu toggle button for Mobile */
+    .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-glass);
+        cursor: pointer;
+        color: var(--text-primary);
+        transition: background 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Close sidebar button inside mobile header */
+    .close-sidebar-btn {
+        display: block !important;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 4px;
+    }
+
+    /* Chat Area Layout adjustments */
+    .chat-header {
+        padding: 16px 20px;
+        gap: 12px;
+    }
+
+    .header-info h1 {
+        font-size: 16px;
+    }
+
+    .header-info p {
+        font-size: 11px;
+    }
+
+    .config-badge {
+        display: none; /* Hide configuration details on mobile to save space */
+    }
+
+    .chat-messages {
+        padding: 20px 16px;
+        gap: 16px;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    .message-content {
+        padding: 12px 16px;
+        font-size: 13.5px;
+    }
+
+    .chat-input-area {
+        padding: 16px;
+    }
+
+    .chat-form {
+        gap: 10px;
+    }
+
+    #query-input {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        border-radius: 12px;
+    }
+
+    .send-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+    }
+
+    .suggestions-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .suggestion-btn {
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Loading screen mobile styling */
+    .loading-container {
+        padding: 24px;
+    }
+
+    .loading-container h2 {
+        font-size: 20px;
+    }
+}
+
+/* Base styles for new components to support mobile layout (hidden by default on desktop) */
+.menu-toggle {
+    display: none;
+}
+
+.close-sidebar-btn {
+    display: none;
+}
+

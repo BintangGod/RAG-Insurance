@@ -47,17 +47,20 @@
         <!-- Sidebar -->
         <aside class="sidebar glass">
             <div class="sidebar-header">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L3 7V13C3 18.52 6.84 23.64 12 25C17.16 23.64 21 18.52 21 13V7L12 2Z" fill="url(#gradient-sidebar)"/>
-                    <path d="M9 12.5L11 14.5L15 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <defs>
-                        <linearGradient id="gradient-sidebar" x1="3" y1="2" x2="21" y2="25" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#3B82F6"/>
-                            <stop offset="1" stop-color="#8B5CF6"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="brand-name">SecureRAG</span>
+                <div style="display: flex; align-items: center; gap: 12px; flex-grow: 1;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L3 7V13C3 18.52 6.84 23.64 12 25C17.16 23.64 21 18.52 21 13V7L12 2Z" fill="url(#gradient-sidebar)"/>
+                        <path d="M9 12.5L11 14.5L15 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient-sidebar" x1="3" y1="2" x2="21" y2="25" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3B82F6"/>
+                                <stop offset="1" stop-color="#8B5CF6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="brand-name">SecureRAG</span>
+                </div>
+                <button id="close-sidebar-btn" class="close-sidebar-btn">&times;</button>
             </div>
 
             <div class="sidebar-content">
@@ -117,9 +120,16 @@
         <!-- Chat Main Area -->
         <main class="chat-area">
             <header class="chat-header glass">
-                <div class="header-info">
-                    <h1>Asisten Klaim Asuransi AI</h1>
-                    <p>Mendukung pertanyaan bilingual (ID / EN) secara real-time</p>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button id="menu-toggle" class="menu-toggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="header-info">
+                        <h1>Asisten Klaim Asuransi AI</h1>
+                        <p>Mendukung pertanyaan bilingual (ID / EN) secara real-time</p>
+                    </div>
                 </div>
                 <div class="config-badge">
                     <span>FAISS + MMR + Cross-Encoder</span>
